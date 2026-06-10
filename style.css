@@ -1,0 +1,1110 @@
+
+
+/* ==========================================================================
+   1. RESET & INITIAL STYLES (Menggunakan Font Inter / Segoe UI)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --sport-navy: #0b2545;       /* Biru Dongker Utama (Kesan Disiplin & Sportif) */
+    --sport-blue: #134074;       /* Biru Aksen Menu */
+    --sport-light-blue: #e6f0fa; /* Latar Belakang Badge / Tombol */
+    --clean-white: #ffffff;      /* Putih Bersih untuk Area Baca Konten */
+    --bg-light: #f4f6f9;         /* Abu-abu Sangat Terang untuk Latar Belakang App */
+    --text-dark: #1e293b;        /* Warna Teks Utama */
+    --text-muted: #64748b;       /* Warna Teks Keterangan */
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    overflow: hidden; /* Mencegah seluruh halaman scroll, kita mau konten kanan saja yang scroll */
+}
+
+/* ==========================================================================
+   2. DASHBOARD LAYOUT (Membagi Kiri & Kanan)
+   ========================================================================== */
+.dashboard-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ==========================================================================
+   3. SIDEBAR (BAGIAN KIRI - FIXED)
+   ========================================================================== */
+.sidebar {
+    width: 280px;
+    background-color: var(--sport-navy);
+    color: var(--clean-white);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+    flex-shrink: 0;
+    height: 100vh; /* Memastikan tinggi sidebar penuh setinggi layar */
+    box-sizing: border-box;
+}
+
+/* Profil di dalam Sidebar */
+.profile-section {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 25px;
+}
+
+.profile-img {
+    width: 120px;       /* Lebar foto fixed */
+    height: 120px;      /* Tinggi foto fixed (harus sama dengan width agar bulat) */
+    border-radius: 50%; /* Membuat lingkaran sempurna */
+    object-fit: cover;  /* Memastikan foto otomatis terpotong rapi di tengah tanpa gepeng */
+    object-position: center 20%;
+    border: 3px solid var(--clean-white);
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: inline-block; /* Menjaga kestabilan elemen di tengah */
+}
+
+.profile-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.role {
+    font-size: 13px;
+    color: #8da9c4;
+    margin-bottom: 12px;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    background-color: var(--sport-blue);
+    color: var(--clean-white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Navigasi Menu */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-1: 1;           /* Mengambil sisa ruang yang tersedia */
+    overflow-y: auto;    /* 💡 Membuat area menu bisa di-scroll jika dropdown memanjang */
+    padding-bottom: 60px; /* 💡 Memberikan ruang kosong di bawah agar tidak mepet layar */
+    
+    /* Menyembunyikan batang scrollbar bawaan browser agar tetap terlihat minimalis & rapi */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Menyembunyikan scrollbar untuk Chrome, Safari, dan Opera */
+.nav-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-item {
+    color: var(--clean-white);
+    text-decoration: none;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: block; 
+    background-color: var(--sport-blue); /* 💡 Memberikan box biru ke SEMUA menu utama */
+    margin-bottom: 4px; /* Memberikan jarak sedikit antar box */
+}
+
+/* Efek saat menu di-hover (disentuh kursor) */
+.nav-item:hover {
+    background-color: #1a528f; /* Box berubah warna sedikit lebih terang */
+    padding-left: 22px;
+}
+
+/* Gaya khusus hanya untuk menu yang sedang aktif/diklik */
+.nav-item.active {
+    background-color: var(--sport-blue); /* Menjadi box biru penanda halaman aktif */
+    color: var(--clean-white);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   4. MAIN CONTENT (BAGIAN KANAN - SCROLLABLE)
+   ========================================================================== */
+.main-content {
+    flex: 1;
+    padding: 0;
+    overflow-y: auto; /* Memastikan scrollbar hanya milik jendela konten yang aktif */
+    height: 100vh;    /* Mengunci tinggi pas selayar monitor */
+    background-color: var(--bg-light);
+    position: relative;
+}
+
+/* Header Atas */
+.content-header {
+    margin-bottom: 35px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 20px;
+}
+
+.content-header h1 {
+    font-size: 26px;
+    color: var(--sport-navy);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.content-header p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. CARDS COMPONENTS (Seksi Tugas UTS & UAS)
+   ========================================================================== */
+.content-section {
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: var(--clean-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid var(--sport-navy); /* Garis aksen atas ala dashboard */
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 24px 30px 15px 30px;
+}
+
+.card-header h2 {
+    font-size: 20px;
+    color: var(--sport-navy);
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 0 30px 30px 30px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-dark);
+}
+
+/* Box Tombol Lampiran Dokumen */
+.download-box {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px dashed #e2e8f0;
+}
+
+.btn-download {
+    display: inline-block;
+    background-color: var(--sport-light-blue);
+    color: var(--sport-blue);
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-download:hover {
+    background-color: var(--sport-blue);
+    color: var(--clean-white);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN (Biar Rapi saat Dibuka di HP Dosen)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    body {
+        overflow: auto;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 30px 20px;
+    }
+    .main-content {
+        height: auto;
+        padding: 20px;
+    }
+}
+
+/* ==========================================================================
+   7. DROPDOWN SUB-MENU NAVIGATION
+   ========================================================================== */
+/* Wadah utama menu dropdown */
+.nav-item-dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: none; /* Mengunci agar tidak ada box latar belakang */
+    border: none;
+}
+
+/* Wadah sub-menu (tersembunyi secara default) */
+.dropdown-container {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px; /* Memberikan efek menjorok ke dalam */
+    transition: all 0.4s ease-in-out; /* Animasi mulus saat membuka */
+}
+
+/* Memunculkan sub-menu saat menu utama di-hover */
+.nav-item-dropdown:hover .dropdown-container {
+    max-height: 200px; /* Batas tinggi maksimal saat terbuka */
+    opacity: 1;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Gaya tampilan untuk item sub-menu */
+.sub-nav-item {
+    color: #8da9c4;
+    text-decoration: none;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 400;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+/* Efek saat sub-menu di-hover */
+.sub-nav-item:hover {
+    color: var(--clean-white);
+    border-left: 2px solid #ffc13b; /* Aksen garis kecil saat sub-menu aktif */
+    padding-left: 18px;
+}
+
+/* ==========================================================================
+   8. BERANDA COMPONENTS (Hero & Mini Cards)
+   ========================================================================== */
+.welcome-hero {
+    background: linear-gradient(135deg, var(--sport-navy), var(--sport-blue));
+    color: var(--clean-white);
+    padding: 35px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(11, 37, 69, 0.1);
+}
+
+.welcome-hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.welcome-hero p {
+    font-size: 15px;
+    color: #8da9c4;
+}
+
+/* Grid Layout untuk Mini Cards */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 15fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.mini-card {
+    background-color: var(--clean-white);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    border-left: 4px solid var(--sport-blue);
+}
+
+.card-icon {
+    font-size: 28px;
+}
+
+.card-info h3 {
+    font-size: 18px;
+    color: var(--sport-navy);
+    font-weight: 700;
+}
+
+.card-info p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   9. NEW FULL-WIDTH HERO BANNER (ORIGINAL IMAGE SIZE)
+   ========================================================================== */
+.welcome-hero-full-container {
+    width: 100%;
+    max-width: 100%; /* Memastikan kontainer tidak meluber keluar layar */
+    overflow: hidden;
+    line-height: 0;   /* Menghilangkan celah kosong di bawah gambar */
+}
+
+.hero-img-full {
+    width: 100%;      /* Mengikuti lebar kontainer secara fleksibel */
+    height: auto;     /* Menjaga rasio foto agar tidak gepeng saat di-zoom */
+    max-width: 100%;
+    display: block;
+}
+
+/* Pembungkus teks bagian bawah banner */
+.beranda-content-inner {
+    padding: 40px; 
+}
+
+/* ==========================================================================
+   10. PROFILE BIODATA GRID STYLE
+   ========================================================================== */
+.profile-biodata-container {
+    background-color: #111622; /* Latar belakang gelap elegan */
+    color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 40px; /* Memberikan jarak dari tepi agar rapi */
+}
+
+.biodata-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 20px;
+}
+
+.biodata-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width-item {
+    grid-column: span 2;
+}
+
+.bio-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #718096;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.bio-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.text-highlight {
+    color: #38a169; /* NIM Hijau Stabilo */
+}
+
+.bio-divider {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin: 25px 0;
+}
+
+.biodata-description p {
+    font-size: 15px;
+    color: #cbd5e0;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* ==========================================================================
+   11. NEW PROFILE LAYOUT STYLE (UPDATED WITH HEADER & VISIBLE TITLE)
+   ========================================================================== */
+
+/* Container Gambar Header Atas */
+.profile-header-banner-container {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.profile-header-img {
+    width: 100%;      /* Fleksibel mengikuti perubahan zoom web */
+    height: auto;     /* Menjaga proporsi tinggi gambar */
+    max-width: 100%;
+    display: block;
+}
+
+/* Wrapper Halaman Profil (Agak turun ke bawah karena ada margin/padding dari banner) */
+.profile-wrapper-page {
+    padding: 35px 40px 40px 40px; /* Diatur presisi agar jarak di bawah gambar pas */
+    font-family: 'Inter', sans-serif;
+}
+
+/* Judul diganti warnanya menjadi Abu-Abu Terang Premium agar terlihat jelas & kontras */
+.section-title-custom {
+    color: #0336de; /* Warna abu-abu terang benderang, sangat kontras di background gelap */
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* Tata letak dua kotak berdampingan */
+.profile-flex-layout {
+    display: flex;
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* Kotak Foto Kiri */
+.profile-photo-box {
+    flex: 0 0 280px;
+    background-color: #111622;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.biodata-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Kotak Data Kanan */
+.profile-info-box {
+    flex: 1;
+    background-color: #111622;
+    padding: 35px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   12. KEUNIKAN DAERAH ASAL LAYOUT STYLE
+   ========================================================================== */
+.daerah-content-box {
+    background-color: #111622; /* Kotak hitam elegan senada */
+    padding: 35px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.daerah-grid-info {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr; /* Teks mendapat porsi lebih lebar, foto di kanan */
+    gap: 30px;
+}
+
+.daerah-text-narrative h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.daerah-text-narrative p {
+    font-size: 15px;
+    color: #cbd5e0;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* Kotak Frame Foto Daerah */
+.daerah-photo-card {
+    background-color: #0b0f19;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.daerah-img-display {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.photo-caption {
+    font-size: 11px;
+    color: #718096;
+    text-align: center;
+    font-style: italic;
+}
+
+/* CSS pembantu untuk menandai sub-menu yang sedang aktif diklik */
+.sub-nav-item.active-sub {
+    color: #38a169 !important; /* Warna hijau menyala khusus sub-menu aktif */
+    font-weight: bold;
+}
+
+/* Responsif Layar Kecil */
+@media (max-width: 900px) {
+    .daerah-grid-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   13. INSPIRASI & TUJUAN LAYOUT STYLE
+   ========================================================================== */
+.inspirasi-flex-layout {
+    display: flex;
+    gap: 25px;
+    align-items: stretch; /* Memastikan tinggi kotak kiri dan kanan sama rata */
+}
+
+/* Base style untuk kotak kiri dan kanan */
+.inspirasi-box, .tujuan-box {
+    flex: 1;
+    background-color: #111622; /* Kotak hitam elegan senada */
+    padding: 35px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+/* Dekorasi Icon di atas judul box */
+.box-icon-header {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.inspirasi-box h4, .tujuan-box h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.inspirasi-box p, .tujuan-box p {
+    font-size: 14px;
+    color: #cbd5e0;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Styling list point di kotak tujuan */
+.tujuan-list {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.tujuan-list li {
+    font-size: 14px;
+    color: #cbd5e0;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    list-style-type: square; /* Mengubah poin bulat menjadi kotak kecil */
+}
+
+.tujuan-list li strong {
+    color: #38a169; /* Memberikan aksen warna hijau stabilo pada kata kunci target */
+}
+
+/* Responsif Layar Handphone (Kotak menumpuk vertikal) */
+@media (max-width: 900px) {
+    .inspirasi-flex-layout {
+        flex-direction: column;
+    }
+}
+
+/* ==========================================================================
+   14. KUTIPAN PENGUAT LAYOUT STYLE (VERTICAL & IMAGE BACKGROUND)
+   ========================================================================== */
+.kutipan-vertical-layout {
+    display: flex;
+    flex-direction: column; /* Mengatur susunan kotak menumpuk ke bawah */
+    gap: 30px; /* Jarak antara kotak foto atas dan kotak refleksi bawah */
+}
+
+/* Kotak Atas: Menggunakan Foto Kamu Sebagai Background */
+.quote-display-box-image {
+    width: 100%;
+    min-height: 280px; /* Tinggi minimum kotak kutipan */
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    border-left: 6px solid #38a169; /* Garis vertikal hijau stabilo pembatas */
+}
+
+/* Lapisan Gelap Gelap di Atas Foto agar Teks Putih Kontras Kontras */
+.quote-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(11, 15, 25, 0.9) 0%, rgba(17, 22, 34, 0.6) 100%);
+    z-index: 1;
+}
+
+/* Pembungkus Konten Teks di Dalam Kotak Foto */
+.quote-inner-content {
+    position: relative;
+    z-index: 2; /* Menaikkan teks di atas lapisan overlay */
+    max-width: 800px;
+}
+
+/* Dekorasi Tanda Kutip Raksasa */
+.large-quote-mark {
+    position: absolute;
+    top: -45px;
+    left: -10px;
+    font-size: 140px;
+    color: rgba(56, 161, 105, 0.15); /* Hijau transparan estetik */
+    font-family: 'Georgia', serif;
+    line-height: 1;
+}
+
+.main-quote-text {
+    font-size: 22px;
+    font-style: italic;
+    color: #ffffff; /* Putih bersih benderang di atas foto */
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Bayangan teks agar super jelas */
+}
+
+.quote-author {
+    font-size: 14px;
+    color: #38a169;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Kotak Bawah: Refleksi Mengajar */
+.quote-reflection-box-bottom {
+    width: 100%;
+    background-color: #111622; /* Kotak hitam elegan */
+    padding: 40px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quote-reflection-box-bottom h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.quote-reflection-box-bottom p {
+    font-size: 15px;
+    color: #cbd5e0;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.quote-reflection-box-bottom strong {
+    color: #38a169;
+}
+
+/* ==========================================================================
+   15. ARTEFAK PEMBELAJARAN LAYOUT (CARDS GRID)
+   ========================================================================== */
+.artefak-intro-text {
+    font-size: 14px;
+    color: #0031d3;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+/* Mengatur susunan kartu dokumen menumpuk vertikal berbaris */
+.artefak-grid-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+}
+
+/* Style Tombol/Kartu Link Utama */
+.artefak-card {
+    display: flex;
+    align-items: center;
+    background-color: #111622;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 12px;
+    text-decoration: none; /* Menghilangkan garis bawah link */
+    transition: all 0.3s ease; /* Transisi animasi mulus */
+}
+
+
+/* Efek Hover saat Kartu Disorot Mouse */
+.artefak-card:hover {
+    transform: translateY(-3px); /* Kartu terangkat sedikit */
+    background-color: #161d2d;
+    border-color: rgba(56, 161, 105, 0.3); /* Border berubah hijau halus */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon Bulat di Sisi Kiri */
+.card-file-icon {
+    font-size: 28px;
+    background-color: #0b0f19;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+/* Blok Info Tengah */
+.card-file-info p {
+    font-size: 13px;
+    color: #002cc9; /* Warna abu-abu terang benderang yang kontras dan estetik */
+    line-height: 1.5;
+}
+
+/* Label Format Berkas */
+.file-tag {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.tag-pdf { background-color: #e53e3e; color: #ffffff; }    /* Merah PDF */
+.tag-ppt { background-color: #dd6b20; color: #ffffff; }    /* Oranye PPT */
+.tag-image { background-color: #3182ce; color: #ffffff; }  /* Biru Gambar */
+
+.card-file-info h4 {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+.artefak-card:hover .card-file-info h4 {
+    color: #38a169; /* Judul otomatis berubah hijau saat di-hover */
+}
+
+.card-file-info p {
+    font-size: 13px;
+    color: #718096;
+    line-height: 1.5;
+}
+
+/* Panah Indikator Kanan */
+.card-arrow-action {
+    font-size: 18px;
+    color: #4a5568;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+}
+
+.artefak-card:hover .card-arrow-action {
+    color: #38a169; /* Panah menyala hijau stabilo */
+    transform: translateX(5px); /* Panah bergeser sedikit ke kanan */
+}
+
+/* Responsif Mobile Layout */
+@media (max-width: 650px) {
+    .artefak-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .card-file-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .card-arrow-action {
+        display: none; /* Sembunyikan panah di layar hp agar ringkas */
+    }
+}
+
+/* ==========================================================================
+   16. NEW RUBRIK ANALISIS ARTEFAK NARRATIVE STYLE
+   ========================================================================== */
+.analisis-rubrik-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 950px;
+    margin-top: 20px;
+}
+
+/* Kotak Modul Aspek Analisis */
+.rubrik-card-box {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.rubrik-card-box:hover {
+    border-color: #3182ce; /* Berubah aksen biru tipis saat disorot */
+    transform: translateX(5px); /* Geser manis ke kanan */
+}
+
+/* Desain Header Judul Aspek */
+.rubrik-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 12px;
+}
+
+/* Nomor Indikator Bulat */
+.rubrik-num {
+    background-color: #0b0f19;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rubrik-header h4 {
+    font-size: 16px;
+    color: #0b0f19;
+    font-weight: 600;
+}
+
+/* Isi Teks Deskripsi Analisis */
+.rubrik-body p {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.rubrik-body strong {
+    color: #0056b3; /* Sorotan teks penting dengan warna biru tegas */
+}
+
+/* ==========================================================================
+   17. PREMIUM MODEL GURU YANG DITUJU LAYOUT STYLE
+   ========================================================================== */
+.model-guru-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 45px;
+    max-width: 1000px;
+    margin-top: 30px;
+    align-items: start;
+}
+
+/* --- KARTU FOTO UTAMA (SISI KIRI) --- */
+.model-guru-photo-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 16px;
+    /* Memberikan efek bayangan dalam dan luar yang sangat elegan */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+    text-align: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Efek interaktif saat foto disorot mouse */
+.model-guru-photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 86, 179, 0.1);
+}
+
+.model-guru-img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #edf2f7;
+}
+
+.photo-badge {
+    background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 25px;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* --- BLOK NARASI AKADEMIK (SISI KANAN) --- */
+.model-guru-narrative-box h4 {
+    font-size: 22px;
+    color: #0b0f19;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Garis dekoratif di bawah judul */
+.model-guru-narrative-box h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: #0056b3;
+    border-radius: 2px;
+}
+
+.model-guru-narrative-box p {
+    font-size: 15px;
+    color: #4a5568;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+/* Gaya Drop Cap (Huruf Pertama Paragraf Pertama Menjadi Raksasa) */
+.model-guru-narrative-box p:first-of-type::first-letter {
+    font-size: 45px;
+    font-weight: 700;
+    color: #0056b3;
+    float: left;
+    line-height: 1;
+    padding-right: 8px;
+    padding-top: 4px;
+    font-family: 'Georgia', serif;
+}
+
+.model-guru-narrative-box strong {
+    color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+
+/* --- DESAIN BARU KARTU POIN KARAKTER (GLOW CARDS) --- */
+.model-core-values {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.value-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #0056b3; /* Garis vertikal warna biru tegas */
+    padding: 20px;
+    border-radius: 6px 12px 12px 6px;
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+/* Efek menyala halus saat poin karakter disorot */
+.value-item:hover {
+    background-color: #f8fafc;
+    border-left-color: #38a169; /* Garis berubah jadi hijau sukses/PPG saat di-hover */
+    transform: translateX(8px); /* Efek dorong ke kanan */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.value-item strong {
+    color: #0b0f19;
+    font-size: 15px;
+    background: none;
+    padding: 0;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+
+/* --- RESPONSIVE BREAKPOINT --- */
+@media (max-width: 900px) {
+    .model-guru-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+    .model-guru-photo-card {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    /* Pembungkus vertikal untuk 3 photocard di sisi kiri */
+.model-guru-photo-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Jarak antar photocard */
+}
+
+/* Mengatur ukuran foto tambahan agar lebih compact dibanding foto utama */
+.intense-card .model-guru-img {
+    max-height: 240px; /* Sedikit lebih pendek agar pas mengalir ke bawah */
+}
+
+/* Variasi Warna Badge Tambahan */
+.badge-green {
+    background: linear-gradient(135deg, #1e4620 0%, #2e7d32 100%) !important;
+}
+
+.badge-blue {
+    background: linear-gradient(135deg, #0f3460 0%, #164e63 100%) !important;
+}
+}
