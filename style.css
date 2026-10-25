@@ -1087,7 +1087,9 @@ body {
         max-width: 360px;
         margin: 0 auto;
     }
-    /* Pembungkus vertikal untuk 3 photocard di sisi kiri */
+}
+
+/* Pembungkus vertikal untuk 3 photocard di sisi kiri (berlaku di semua ukuran layar) */
 .model-guru-photo-column {
     display: flex;
     flex-direction: column;
@@ -1107,4 +1109,8 @@ body {
 .badge-blue {
     background: linear-gradient(135deg, #0f3460 0%, #164e63 100%) !important;
 }
-}
+
+/* ==========================================================================
+   18. PPL MANDIRI (tambahan)
+   ========================================================================== */
+.tag-video { background-color: #805ad5; color: #ffffff; }  /* Ungu Video */
